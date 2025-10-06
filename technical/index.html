@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actus Digital Payments - Technical Guide</title>
+    <style>
+        :root {
+            --primary: #667eea;
+            --text-dark: #2d3c54;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-code: #1e1e1e;
+            --code-text: #d4d4d4;
+            --code-accent: #569cd6;
+            --code-success: #4ec9b0;
+            --code-warning: #ce9178;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px 60px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 0 80px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+        }
+        
+        section {
+            margin-bottom: 80px;
+        }
+        
+        h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        h3 {
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h4 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        /* Interactive Architecture */
+        .architecture-container {
+            background: var(--bg-light);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .arch-layer {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .arch-layer:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .arch-layer-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .arch-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .arch-component {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        
+        .flow-arrow {
+            text-align: center;
+            color: var(--primary);
+            font-size: 30px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        /* API Endpoints */
+        .endpoint {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-left: 4px solid var(--primary);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .endpoint:hover {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+        }
+        
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .endpoint-method {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .endpoint-method.post {
+            background: #10b981;
+        }
+        
+        .endpoint-method.put {
+            background: #f59e0b;
+        }
+        
+        .endpoint-path {
+            color: var(--text-dark);
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .endpoint-description {
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: var(--bg-code);
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            color: var(--code-text);
+        }
+        
+        .code-header {
+            background: #2d2d2d;
+            padding: 12px 20px;
+            border-radius: 8px 8px 0 0;
+            border: 1px solid #3a3a3a;
+            border-bottom: none;
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-header + .code-block {
+            border-radius: 0 0 8px 8px;
+            margin-top: 0;
+        }
+        
+        .keyword { color: var(--code-accent); }
+        .string { color: var(--code-warning); }
+        .number { color: var(--code-success); }
+        
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .data-table td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #e5e7eb;
+            color: var(--text-light);
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:hover {
+            background: var(--bg-light);
+        }
+        
+        .data-table code {
+            background: var(--bg-light);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: var(--primary);
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .info-box h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .warning-box {
+            background: rgba(245, 158, 11, 0.05);
+            border-left: 4px solid #f59e0b;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .warning-box h4 {
+            margin-top: 0;
+            color: #f59e0b;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+            font-size: 20px;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 80px 20px 40px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .arch-components {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="58" fill="#667eea"/>
+                    <path d="M35 60L45 70L85 35" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Actus Technical Guide</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#architecture">Architecture</a>
+                <a href="#api">API Reference</a>
+                <a href="#data-models">Data Models</a>
+                <a href="#integration">Integration</a>
+                <a href="#security">Security</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Technical Documentation</h1>
+            <p class="subtitle">Architecture, APIs, Data Models & Integration Specifications</p>
+        </div>
+
+        <section id="architecture">
+            <h2>System Architecture</h2>
+            <p>Actus provides a blockchain orchestration layer that sits between agency ERPs and payment execution systems, ensuring compliance, immutability, and real-time settlements.</p>
+            
+            <div class="architecture-container">
+                <div class="arch-layer">
+                    <div class="arch-layer-title">🏛️ Agency Systems Layer</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Source systems where procurement and financial data originates</p>
+                    <div class="arch-components">
+                        <div class="arch-component">SAP ERP</div>
+                        <div class="arch-component">Oracle Financials</div>
+                        <div class="arch-component">Momentum</div>
+                        <div class="arch-component">Legacy Systems</div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="arch-layer">
+                    <div class="arch-layer-title">🔗 Actus Blockchain Orchestration Layer</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Core platform ensuring compliance and immutability</p>
+                    <div class="arch-components">
+                        <div class="arch-component"><strong>SPR Builder</strong><br>Creates payment requests</div>
+                        <div class="arch-component"><strong>Compliance Engine</strong><br>3-way match, CGAC/TAS</div>
+                        <div class="arch-component"><strong>Blockchain Ledger</strong><br>Immutable transaction records</div>
+                        <div class="arch-component"><strong>Smart Contracts</strong><br>Automated rules engine</div>
+                        <div class="arch-component"><strong>Atomic Settlement</strong><br>Multi-party coordination</div>
+                        <div class="arch-component"><strong>Webhook Manager</strong><br>Event notifications</div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="arch-layer">
+                    <div class="arch-layer-title">🏛️ Treasury Bureau of Fiscal Service (BFS)</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Federal payment validation and certification</p>
+                    <div class="arch-components">
+                        <div class="arch-component"><strong>PAM Validator</strong><br>SPR validation</div>
+                        <div class="arch-component"><strong>SPS Certifier</strong><br>Payment certification</div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="arch-layer">
+                    <div class="arch-layer-title">⚡ Payment Execution Layer</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Final settlement through payment processors</p>
+                    <div class="arch-components">
+                        <div class="arch-component"><strong>Fiserv Gateway</strong><br>Payment processor</div>
+                        <div class="arch-component"><strong>Fed Reserve FedNow</strong><br>Instant settlement rail</div>
+                        <div class="arch-component"><strong>Traditional Rails</strong><br>ACH, Fedwire, SWIFT</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Core Components Explained</h3>
+
+            <h4>1. SPR Builder & Validator</h4>
+            <ul>
+                <li>Assembles Standard Payment Requests from PO, invoice, receipt data</li>
+                <li>Validates CGAC/TAS codes and budget authority</li>
+                <li>Performs 3-way match (PO = Invoice = Receipt)</li>
+                <li>Generates immutable blockchain transaction</li>
+            </ul>
+
+            <h4>2. Compliance Engine</h4>
+            <ul>
+                <li>Enforces acquisition regulations (FAR/DFARS)</li>
+                <li>Validates financial obligations and commitments</li>
+                <li>Checks anti-deficiency protections</li>
+                <li>Audits all transactions for improper payment indicators</li>
+            </ul>
+
+            <h4>3. Blockchain Ledger</h4>
+            <ul>
+                <li>Stores immutable transaction records from appropriation to disbursement</li>
+                <li>Creates cryptographic proof chain for all payment actions</li>
+                <li>Enables atomic settlements across multiple parties</li>
+                <li>Provides real-time audit trail for Treasury and agency CFOs</li>
+            </ul>
+
+            <h4>4. Smart Contracts</h4>
+            <ul>
+                <li>IF/THEN rules encoded on blockchain</li>
+                <li>Automated execution when conditions met</li>
+                <li>Example: IF (3-way match PASS AND budget available) THEN (generate SPR)</li>
+                <li>Reduces manual approvals by 95%+</li>
+            </ul>
+
+            <h4>5. Atomic Settlement Engine</h4>
+            <ul>
+                <li>All-or-nothing execution for multi-party payments</li>
+                <li>Coordinates across FedNow, RTP, ACH, card networks</li>
+                <li>Guarantees financial integrity (no partial failures)</li>
+                <li>Immutable settlement records on blockchain</li>
+            </ul>
+        </section>
+
+        <section id="api">
+            <h2>API Reference</h2>
+            <p>RESTful API for integrating with Actus platform. All endpoints require JWT authentication.</p>
+
+            <h3>Base URLs</h3>
+            <div class="code-block">
+                <pre>Production:  https://app.act.us/v1/
+Staging:     https://stage.act.us/v1/
+Testing:     https://test.act.us/v1/</pre>
+            </div>
+
+            <h3>Authentication</h3>
+            <div class="code-block">
+                <pre>Authorization: Bearer {jwt_token}</pre>
+            </div>
+
+            <h3>Payment Endpoints</h3>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <span class="endpoint-path">/payments/spr</span>
+                </div>
+                <div class="endpoint-description">Create a new Standard Payment Request</div>
+            </div>
+
+            <div class="code-header">Request Body</div>
+            <div class="code-block">
+                <pre>{
+  <span class="string">"po_number"</span>: <span class="string">"PO-2025-00123"</span>,
+  <span class="string">"invoice_id"</span>: <span class="string">"INV-2025-789"</span>,
+  <span class="string">"supplier"</span>: {
+    <span class="string">"duns"</span>: <span class="string">"123456789"</span>,
+    <span class="string">"cage"</span>: <span class="string">"1AB23"</span>,
+    <span class="string">"name"</span>: <span class="string">"Acme Corp"</span>
+  },
+  <span class="string">"accounting"</span>: {
+    <span class="string">"cgac"</span>: <span class="string">"070"</span>,
+    <span class="string">"tas"</span>: <span class="string">"070X2025/2026"</span>
+  },
+  <span class="string">"amount"</span>: <span class="number">10000</span>,
+  <span class="string">"method"</span>: <span class="string">"RTP"</span>,
+  <span class="string">"match_evidence"</span>: {
+    <span class="string">"receipt_id"</span>: <span class="string">"RCP-2025-456"</span>,
+    <span class="string">"status"</span>: <span class="string">"PASS"</span>
+  }
+}</pre>
+            </div>
+
+            <div class="code-header">Response</div>
+            <div class="code-block">
+                <pre>{
+  <span class="string">"payment_id"</span>: <span class="string">"pay_12345"</span>,
+  <span class="string">"spr_id"</span>: <span class="string">"spr_67890"</span>,
+  <span class="string">"status"</span>: <span class="string">"PendingTreasury"</span>,
+  <span class="string">"blockchain_tx"</span>: <span class="string">"0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385"</span>,
+  <span class="string">"created_at"</span>: <span class="string">"2025-09-15T14:03:22Z"</span>
+}</pre>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method">GET</span>
+                    <span class="endpoint-path">/payments/{payment_id}</span>
+                </div>
+                <div class="endpoint-description">Retrieve payment status and details</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <span class="endpoint-path">/payments/{payment_id}/execute</span>
+                </div>
+                <div class="endpoint-description">Execute payment after Treasury PAM approval</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method">GET</span>
+                    <span class="endpoint-path">/webhooks/register</span>
+                </div>
+                <div class="endpoint-description">Register webhook endpoint for payment status updates</div>
+            </div>
+
+            <h3>Compliance Endpoints</h3>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <span class="endpoint-path">/compliance/validate</span>
+                </div>
+                <div class="endpoint-description">Validate 3-way match before SPR generation</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method">GET</span>
+                    <span class="endpoint-path">/compliance/audit/{payment_id}</span>
+                </div>
+                <div class="endpoint-description">Retrieve complete audit trail for payment</div>
+            </div>
+        </section>
+
+        <section id="data-models">
+            <h2>Data Models</h2>
+
+            <h3>Payment Record</h3>
+            <div class="code-block">
+                <pre>{
+  <span class="string">"payment_id"</span>: <span class="string">"pay_12345"</span>,
+  <span class="string">"request_id"</span>: <span class="string">"req_5555"</span>,
+  <span class="string">"po_number"</span>: <span class="string">"PO-2025-00123"</span>,
+  <span class="string">"invoice_id"</span>: <span class="string">"INV-2025-789"</span>,
+  <span class="string">"supplier"</span>: {
+    <span class="string">"id"</span>: <span class="string">"sup_321"</span>,
+    <span class="string">"duns"</span>: <span class="string">"123456789"</span>,
+    <span class="string">"cage"</span>: <span class="string">"1AB23"</span>,
+    <span class="string">"name"</span>: <span class="string">"Acme Corp"</span>
+  },
+  <span class="string">"accounting"</span>: {
+    <span class="string">"cgac"</span>: <span class="string">"070"</span>,
+    <span class="string">"tas"</span>: <span class="string">"070X2025/2026"</span>,
+    <span class="string">"obligation_number"</span>: <span class="string">"OBL-2025-456"</span>
+  },
+  <span class="string">"method"</span>: <span class="string">"RTP"</span>,
+  <span class="string">"amount"</span>: <span class="number">10000</span>,
+  <span class="string">"status"</span>: <span class="string">"Settled"</span>,
+  <span class="string">"blockchain_tx"</span>: <span class="string">"0x7f9fade1..."</span>,
+  <span class="string">"gateway_ref"</span>: <span class="string">"fiserv_ref_789"</span>,
+  <span class="string">"events"</span>: [
+    {
+      <span class="string">"type"</span>: <span class="string">"SPR_CREATED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-15T14:03:22Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"actus_system"</span>
+    },
+    {
+      <span class="string">"type"</span>: <span class="string">"TREASURY_APPROVED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-15T14:03:45Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"treasury_pam"</span>
+    },
+    {
+      <span class="string">"type"</span>: <span class="string">"PAYMENT_EXECUTED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-15T14:04:12Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"fiserv_gateway"</span>
+    }
+  ]
+}</pre>
+            </div>
+
+            <h3>SPR Field Mapping</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Actus Field</th>
+                        <th>SPR/ERP Field</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>po_number</code></td>
+                        <td><code>PO_ID</code></td>
+                        <td>string</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>invoice_id</code></td>
+                        <td><code>INVOICE_ID</code></td>
+                        <td>string</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>accounting.cgac</code></td>
+                        <td><code>CGAC_CODE</code></td>
+                        <td>string (3 chars)</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>accounting.tas</code></td>
+                        <td><code>TAS_CODE</code></td>
+                        <td>string</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>supplier.duns</code></td>
+                        <td><code>PAYEE_DUNS</code></td>
+                        <td>string (9 chars)</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>supplier.cage</code></td>
+                        <td><code>PAYEE_CAGE</code></td>
+                        <td>string (5 chars)</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><code>amount</code></td>
+                        <td><code>AMOUNT</code></td>
+                        <td>number</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>method</code></td>
+                        <td><code>PAYMENT_METHOD</code></td>
+                        <td>enum</td>
+                        <td>Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="integration">
+            <h2>Integration Guide</h2>
+
+            <h3>ERP Integration Flow</h3>
+            <ol>
+                <li><strong>Purchase Order Creation:</strong> Agency creates PO in their ERP system</li>
+                <li><strong>Data Sync:</strong> Actus receives PO data via Ascella integration layer</li>
+                <li><strong>Invoice Receipt:</strong> Supplier submits invoice (via IP or direct)</li>
+                <li><strong>3-Way Match:</strong> Actus validates PO = Invoice = Receipt</li>
+                <li><strong>SPR Generation:</strong> Actus creates blockchain-backed SPR</li>
+                <li><strong>Treasury Submission:</strong> SPR flows through ERP to Treasury BFS/PAM</li>
+                <li><strong>Approval Callback:</strong> Treasury PAM returns approval to Actus</li>
+                <li><strong>Payment Execution:</strong> Actus triggers Fiserv for settlement</li>
+                <li><strong>Webhook Notification:</strong> Settlement confirmation updates ERP</li>
+            </ol>
+
+            <h3>Supported ERP Systems</h3>
+            <p>Integration is provided through our partner <strong>Ascella</strong>, who specializes in federal ERP connectivity:</p>
+            <ul>
+                <li><strong>SAP:</strong> Direct API integration via Ascella connector</li>
+                <li><strong>Oracle EBS:</strong> Web services integration</li>
+                <li><strong>Momentum:</strong> Batch file exchange with real-time webhooks</li>
+                <li><strong>Legacy Systems:</strong> SFTP/CSV import with validation layer</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Integration Timeline</h4>
+                <p>Typical ERP integration takes 6-8 weeks:</p>
+                <ul>
+                    <li>Weeks 1-2: Schema mapping and field validation with Ascella</li>
+                    <li>Weeks 3-4: Sandbox testing with sample data</li>
+                    <li>Weeks 5-6: UAT with agency stakeholders</li>
+                    <li>Weeks 7-8: Production cutover and parallel run</li>
+                </ul>
+            </div>
+
+            <h3>Webhook Configuration</h3>
+            <p>Register your endpoint to receive real-time payment status updates:</p>
+            
+            <div class="code-block">
+                <pre>{
+  <span class="string">"url"</span>: <span class="string">"https://agency.gov/webhooks/actus"</span>,
+  <span class="string">"events"</span>: [
+    <span class="string">"payment.approved"</span>,
+    <span class="string">"payment.executed"</span>,
+    <span class="string">"payment.settled"</span>,
+    <span class="string">"payment.failed"</span>
+  ],
+  <span class="string">"secret"</span>: <span class="string">"your_webhook_secret"</span>
+}</pre>
+            </div>
+
+            <h3>Webhook Payload Example</h3>
+            <div class="code-block">
+                <pre>{
+  <span class="string">"event"</span>: <span class="string">"payment.settled"</span>,
+  <span class="string">"timestamp"</span>: <span class="string">"2025-09-15T14:04:12Z"</span>,
+  <span class="string">"payment_id"</span>: <span class="string">"pay_12345"</span>,
+  <span class="string">"amount"</span>: <span class="number">10000</span>,
+  <span class="string">"gateway_ref"</span>: <span class="string">"fiserv_ref_789"</span>,
+  <span class="string">"signature"</span>: <span class="string">"sha256_signature_here"</span>
+}</pre>
+            </div>
+        </section>
+
+        <section id="security">
+            <h2>Security & Compliance</h2>
+
+            <h3>Authentication</h3>
+            <ul>
+                <li><strong>JWT Tokens:</strong> All API requests require valid JWT bearer token</li>
+                <li><strong>Token Expiry:</strong> 1 hour default, refresh tokens valid 30 days</li>
+                <li><strong>Scopes:</strong> Fine-grained permissions (read:payments, write:spr, etc.)</li>
+            </ul>
+
+            <h3>Data Encryption</h3>
+            <ul>
+                <li><strong>In Transit:</strong> TLS 1.3 for all API communications</li>
+                <li><strong>At Rest:</strong> AES-256 encryption for all stored data</li>
+                <li><strong>Blockchain:</strong> Cryptographic signatures for transaction integrity</li>
+            </ul>
+
+            <h3>PCI Compliance</h3>
+            <div class="warning-box">
+                <h4>Payment Card Security</h4>
+                <p>For G2B virtual card payments:</p>
+                <ul>
+                    <li>Never store raw PANs in your systems</li>
+                    <li>Use Actus tokenization for all card references</li>
+                    <li>Implement hosted payment fields for sensitive data capture</li>
+                    <li>Log card usage but mask all but last 4 digits</li>
+                </ul>
+            </div>
+
+            <h3>FedRAMP Authorization</h3>
+            <ul>
+                <li><strong>Level:</strong> FedRAMP High (in progress)</li>
+                <li><strong>Controls:</strong> 421 NIST 800-53 controls implemented</li>
+                <li><strong>Logging:</strong> Centralized audit logs with 7-year retention</li>
+                <li><strong>Monitoring:</strong> 24/7 SOC with automated threat detection</li>
+            </ul>
+
+            <h3>Blockchain Security</h3>
+            <ul>
+                <li><strong>Consensus:</strong> Byzantine Fault Tolerant (BFT) algorithm</li>
+                <li><strong>Nodes:</strong> Distributed across Treasury, agencies, and Actus infrastructure</li>
+                <li><strong>Immutability:</strong> Hash chaining prevents retroactive modification</li>
+                <li><strong>Access Control:</strong> Smart contract permissions enforce who can execute transactions</li>
+            </ul>
+
+            <h3>Rate Limits</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Rate Limit</th>
+                        <th>Burst</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>POST /payments/spr</td>
+                        <td>1000 req/min</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <td>GET /payments/*</td>
+                        <td>5000 req/min</td>
+                        <td>10000</td>
+                    </tr>
+                    <tr>
+                        <td>POST /compliance/validate</td>
+                        <td>2000 req/min</td>
+                        <td>4000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="testing">
+            <h2>Testing & Environments</h2>
+
+            <h3>Available Environments</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Environment</th>
+                        <th>Base URL</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Testing</td>
+                        <td><code>https://test.act.us/v1/</code></td>
+                        <td>Development and initial integration testing</td>
+                    </tr>
+                    <tr>
+                        <td>Staging (UAT)</td>
+                        <td><code>https://stage.act.us/v1/</code></td>
+                        <td>User acceptance testing with Treasury sandbox</td>
+                    </tr>
+                    <tr>
+                        <td>Production</td>
+                        <td><code>https://app.act.us/v1/</code></td>
+                        <td>Live payments with real Treasury PAM integration</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Test Cases</h3>
+            <ol>
+                <li><strong>SPR Happy Path:</strong> Valid PO, invoice, receipt → Treasury approval → settlement</li>
+                <li><strong>3-Way Match Failure:</strong> Invoice amount mismatch → validation error</li>
+                <li><strong>Treasury Rejection:</strong> Invalid TAS code → SPR rejected by PAM</li>
+                <li><strong>Webhook Retry:</strong> Simulate network failure → automatic retry logic</li>
+                <li><strong>Atomic Split:</strong> Multi-party payment → all-or-nothing settlement</li>
+                <li><strong>Rail Fallback:</strong> RTP unavailable → automatic ACH fallback</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Test Data</h4>
+                <p>Use these test values in testing environment:</p>
+                <ul>
+                    <li>CGAC: <code>070</code> (DHS)</li>
+                    <li>TAS: <code>070X2025/2026</code></li>
+                    <li>Test DUNS: <code>999999999</code></li>
+                    <li>Test Amount: <code>1000</code> (any amount ending in 00 auto-approves)</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <h2 style="margin-bottom: 20px;">Need Technical Support?</h2>
+        <p style="margin-bottom: 30px; opacity: 0.9;">
+            Contact our developer support team for API access, integration assistance, and technical documentation
+        </p>
+        <p style="font-size: 18px; margin-bottom: 30px;">
+            Email: <a href="mailto:dev-support@paperless-innovations.com">dev-support@paperless-innovations.com</a>
+        </p>
+        <a href="../index.html" class="cta-button">Back to Main Menu</a>
+        <p style="margin-top: 30px; font-size: 14px; opacity: 0.7;">
+            Documentation Version 1.0 | Last Updated: October 2025
+        </p>
+    </footer>
+
+    <div class="back-to-top">↑</div>
+
+    <script>
+        const backToTop = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add hover effect to architecture layers
+        document.querySelectorAll('.arch-layer').forEach(layer => {
+            layer.addEventListener('click', () => {
+                layer.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    layer.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

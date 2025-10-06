@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actus Digital Payments - Investor Deck</title>
+    <style>
+        :root {
+            --primary: #667eea;
+            --text-dark: #2d3c54;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: #ffffff;
+        }
+        
+        .slide-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+        
+        .slide {
+            max-width: 1400px;
+            width: 100%;
+        }
+        
+        .title-slide {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #5a67d8 100%);
+            color: white;
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .logo-container svg {
+            width: 100px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+        
+        .title-slide h1 {
+            font-size: 72px;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+        
+        .title-slide .subtitle {
+            font-size: 32px;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+        
+        .title-slide .tagline {
+            font-size: 24px;
+            opacity: 0.9;
+        }
+        
+        .slide h2 {
+            font-size: 56px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .slide h3 {
+            font-size: 36px;
+            margin-bottom: 25px;
+            margin-top: 40px;
+            color: var(--text-dark);
+        }
+        
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .market-card {
+            background: var(--bg-light);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .market-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+        
+        .market-card .number {
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .market-card .label {
+            font-size: 24px;
+            color: var(--text-dark);
+        }
+        
+        .advantages {
+            display: grid;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .advantage {
+            background: var(--bg-light);
+            border-left: 5px solid var(--primary);
+            padding: 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .advantage:hover {
+            background: #f3f4f6;
+            transform: translateX(10px);
+        }
+        
+        .advantage h4 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .advantage p {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .timeline-content h4 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+        
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .stat-box {
+            background: var(--bg-light);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .stat-box .value {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-box .metric {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        .nav-arrows {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-arrow {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-arrow:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .nav-arrow:disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .slide-number {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: 2px solid var(--primary);
+            color: var(--text-dark);
+        }
+        
+        ul {
+            margin-left: 30px;
+            margin-top: 20px;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            font-size: 20px;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, var(--primary), #5a67d8);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 1024px) {
+            .market-grid, .timeline::before {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+            }
+            
+            .timeline-content {
+                width: 100%;
+                margin-left: 50px;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .stats-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="slides">
+        <div class="slide-container title-slide">
+            <div class="slide">
+                <div class="logo-container">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="58" fill="#667eea"/>
+                        <path d="M35 60L45 70L85 35" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1>Actus Digital Payments</h1>
+                <div class="subtitle">Transforming Federal Payment Infrastructure</div>
+                <div class="tagline">Investor Overview</div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Market Opportunity</h2>
+                <div class="market-grid">
+                    <div class="market-card">
+                        <div class="number">$6.5T</div>
+                        <div class="label">Annual Federal Spending</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="number">500+</div>
+                        <div class="label">Federal Agencies & Departments</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="number">$175B</div>
+                        <div class="label">Annual Improper Payments</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="number">100%</div>
+                        <div class="label">Addressable with Actus</div>
+                    </div>
+                </div>
+                <p style="font-size: 22px; margin-top: 40px; color: var(--text-light);">
+                    Every federal transaction flows through Treasury's Bureau of Fiscal Service. 
+                    Actus provides the <span class="highlight">blockchain orchestration layer</span> 
+                    that ensures compliance, eliminates improper payments, and enables real-time settlements.
+                </p>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>The Problem We Solve</h2>
+                <div class="advantages">
+                    <div class="advantage">
+                        <h4>Payment Processing Takes Weeks</h4>
+                        <p>Manual approvals, paper-based workflows, and batch processing create delays 
+                        that slow critical operations, especially in emergency response scenarios.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>$175B in Improper Payments Annually</h4>
+                        <p>Lack of automated compliance checks, weak audit trails, and fragmented 
+                        systems enable fraud, waste, and abuse across federal programs.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>No Real-Time Visibility</h4>
+                        <p>Agencies can't track payment status, reconciliation is manual, and 
+                        financial reporting is delayed by weeks or months.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Fragmented Payment Rails</h4>
+                        <p>Agencies struggle with multiple vendor requirements (ACH, wire, check, card) 
+                        while Treasury mandates strict compliance that slows everything down.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>The Actus Solution</h2>
+                <h3>Blockchain Orchestration Layer</h3>
+                <ul>
+                    <li>Automates acquisition and financial compliance before payments execute</li>
+                    <li>Generates SPRs (Standard Payment Requests) on blockchain with immutable audit trail</li>
+                    <li>Ensures atomic settlements - all parties paid together or none paid</li>
+                    <li>Integrates directly with Treasury BFS and Federal Reserve FedNow Service</li>
+                </ul>
+                <h3>Universal Payment Gateway</h3>
+                <ul>
+                    <li>Single interface to all payment rails: FedNow, RTP, ACH, Fedwire, SWIFT</li>
+                    <li>G2B virtual cards backed by stablecoin - no vendor onboarding required</li>
+                    <li>Works with any ERP system (SAP, Oracle, Momentum, legacy systems)</li>
+                </ul>
+                <h3>Smart Contracts & Automation</h3>
+                <ul>
+                    <li>Pre-programmed compliance rules eliminate manual reviews</li>
+                    <li>3-way match (PO, Invoice, Receipt) automated with CGAC/TAS validation</li>
+                    <li>95%+ transactions auto-processed in under 60 seconds</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Competitive Advantages</h2>
+                <div class="advantages">
+                    <div class="advantage">
+                        <h4>Patented Blockchain Technology</h4>
+                        <p>Proprietary blockchain orchestration enables multi-party atomic settlements 
+                        across government payment rails. Creates immutable audit trail from appropriation 
+                        to disbursement.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Treasury & Federal Reserve Integration</h4>
+                        <p>Direct integration with Bureau of Fiscal Service PAM system and Federal Reserve 
+                        FedNow Service. Only solution certified for government-wide deployment.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Universal ERP Compatibility</h4>
+                        <p>Works with any agency ERP system through our integration partner Ascella. 
+                        No rip-and-replace - layers on top of existing infrastructure.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>First-Mover Advantage in DHS</h4>
+                        <p>Live pilot with DHS (FEMA, CBP, ICE, TSA) provides proof-of-concept and 
+                        reference architecture for government-wide scaling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Proven Success Metrics</h2>
+                <div class="stats-panel">
+                    <div class="stat-box">
+                        <div class="value">95%</div>
+                        <div class="metric">Auto-Processed Transactions</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">&lt;60s</div>
+                        <div class="metric">Payment Processing Time</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">99%</div>
+                        <div class="metric">Reconciliation Accuracy</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">80%</div>
+                        <div class="metric">Cycle Time Reduction</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">100%</div>
+                        <div class="metric">CGAC/TAS Compliance</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">100%</div>
+                        <div class="metric">3-Way Match Coverage</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">0</div>
+                        <div class="metric">Improper Payments</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">Real-Time</div>
+                        <div class="metric">Financial Visibility</div>
+                    </div>
+                </div>
+                <p style="font-size: 22px; margin-top: 40px; text-align: center; color: var(--text-light);">
+                    Metrics from DHS pilot program demonstrate production-ready capabilities
+                </p>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Scaling Roadmap</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Phase 1: DHS Pilot (Current)</h4>
+                            <p>FEMA, CBP, ICE, TSA components</p>
+                            <p>RTP and G2B virtual cards</p>
+                            <p>Limited scope: emergency procurement and software licenses</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Phase 2: DHS-Wide (Quarters 2-3)</h4>
+                            <p>Expand to all DHS components</p>
+                            <p>Add FedNow instant settlements</p>
+                            <p>Full ERP integration across all systems</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Phase 3: CFO Act Agencies (Quarters 4-6)</h4>
+                            <p>Deploy to 24 CFO Act agencies + DoD</p>
+                            <p>Smart contracts and atomic settlements as defaults</p>
+                            <p>Treasury mandate for blockchain compliance</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Phase 4: Government-Wide (Year 2+)</h4>
+                            <p>500+ federal agencies and departments</p>
+                            <p>Embedded accounts and supplier financing</p>
+                            <p>International payments through SWIFT integration</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Revenue Model</h2>
+                <div class="advantages">
+                    <div class="advantage">
+                        <h4>Transaction Fees</h4>
+                        <p>Basis point fee on each payment processed through Actus platform. 
+                        Revenue scales directly with federal spending processed ($6.5T TAM).</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Platform Subscription</h4>
+                        <p>Annual SaaS fees for agencies using Actus orchestration layer. 
+                        Tiered pricing based on transaction volume and number of components.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Revenue Share</h4>
+                        <p>Small share of agency prompt pay rewards and rebates generated through 
+                        early payment optimization. Aligned incentives drive faster processing and cost savings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Why Now?</h2>
+                <div class="advantages">
+                    <div class="advantage">
+                        <h4>Federal Reserve FedNow Launch</h4>
+                        <p>Fed's new instant payment rail (launched 2023) enables real-time government 
+                        payments for first time. Actus provides the orchestration layer Treasury needs.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>OMB Improper Payments Mandate</h4>
+                        <p>Executive orders requiring agencies to eliminate improper payments create 
+                        regulatory tailwind. Actus is the only blockchain solution certified by Treasury.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>DHS Modernization Initiative</h4>
+                        <p>$1B+ DHS IT modernization budget prioritizes payment automation. Current 
+                        pilot proves capabilities and creates reference architecture.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Blockchain Maturity & Acceptance</h4>
+                        <p>Federal blockchain adoption accelerating. GSA, Treasury, and DoD all have 
+                        active blockchain initiatives. Regulatory clarity emerging.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>The Ask</h2>
+                <div class="market-grid">
+                    <div class="market-card">
+                        <div class="number">$25M</div>
+                        <div class="label">Series A Target</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="number">18mo</div>
+                        <div class="label">Runway to Gov't-Wide Scale</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 50px;">Use of Funds</h3>
+                <ul>
+                    <li><span class="highlight">Engineering (40%)</span> - Scale platform, add payment rails, enhance security</li>
+                    <li><span class="highlight">Sales & Gov't Relations (30%)</span> - CFO Act agency expansion, Treasury relationships</li>
+                    <li><span class="highlight">Implementation Services (20%)</span> - Ascella partnership, ERP integrations, agency onboarding</li>
+                    <li><span class="highlight">Operations & Compliance (10%)</span> - FedRAMP certification, SOC 2, legal, finance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Leadership Team</h2>
+                <p style="font-size: 22px; margin-bottom: 40px; color: var(--text-light);">
+                    Proven track record in government technology, payments, and blockchain
+                </p>
+                <div class="advantages">
+                    <div class="advantage">
+                        <h4>Government Experience</h4>
+                        <p>Deep relationships across DHS, Treasury, OMB, and Federal Reserve. 
+                        Team has delivered $100M+ in federal technology projects.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Payments Expertise</h4>
+                        <p>Former executives from Fiserv, Federal Reserve, and Treasury Bureau of 
+                        Fiscal Service. Understand both private and public sector payment rails.</p>
+                    </div>
+                    <div class="advantage">
+                        <h4>Blockchain & Security</h4>
+                        <p>Patented blockchain technology built by team with background in distributed 
+                        systems, cryptography, and FedRAMP compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <div class="slide">
+                <h2>Investment Highlights</h2>
+                <ul style="font-size: 24px;">
+                    <li><span class="highlight">$6.5T addressable market</span> with government mandate to modernize payments</li>
+                    <li><span class="highlight">Patented technology</span> with Treasury and Federal Reserve certification</li>
+                    <li><span class="highlight">Proven metrics</span> from live DHS pilot: 95% automation, &lt;60s processing</li>
+                    <li><span class="highlight">Clear scaling path</span> from DHS → CFO Act agencies → 500+ federal entities</li>
+                    <li><span class="highlight">Regulatory tailwinds</span>: FedNow launch, improper payments mandate, modernization budgets</li>
+                    <li><span class="highlight">Experienced team</span> with government relationships and payments expertise</li>
+                </ul>
+                <p style="font-size: 28px; margin-top: 60px; text-align: center; color: var(--text-dark); font-weight: 600;">
+                    Actus is the infrastructure layer for federal payment transformation
+                </p>
+                
+                <div style="margin-top: 80px; text-align: center; padding: 40px; background: var(--bg-light); border-radius: 12px;">
+                    <h3 style="margin-top: 0; margin-bottom: 20px; color: var(--primary);">Ready to Learn More?</h3>
+                    <p style="font-size: 20px; color: var(--text-light); margin-bottom: 30px;">
+                        Request detailed financial projections and schedule a demo with our CEO
+                    </p>
+                    <p style="font-size: 24px; font-weight: 600; color: var(--text-dark); margin-bottom: 10px;">
+                        Mike Smith
+                    </p>
+                    <p style="font-size: 20px; color: var(--primary); margin-bottom: 40px;">
+                        <a href="mailto:mike.smith@paperless-innovations.com" style="color: var(--primary); text-decoration: none;">
+                            mike.smith@paperless-innovations.com
+                        </a>
+                    </p>
+                    <a href="../index.html" style="display: inline-block; padding: 15px 35px; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 18px; transition: all 0.3s ease;">
+                        Back to Main Menu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number">
+        <span id="current">1</span> / <span id="total">12</span>
+    </div>
+
+    <div class="nav-arrows">
+        <button class="nav-arrow" id="prev" onclick="changeSlide(-1)">←</button>
+        <button class="nav-arrow" id="next" onclick="changeSlide(1)">→</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-container');
+        const total = slides.length;
+        
+        document.getElementById('total').textContent = total;
+        
+        function showSlide(n) {
+            slides[currentSlide].style.display = 'none';
+            currentSlide = (n + total) % total;
+            slides[currentSlide].style.display = 'flex';
+            document.getElementById('current').textContent = currentSlide + 1;
+            
+            document.getElementById('prev').disabled = currentSlide === 0;
+            document.getElementById('next').disabled = currentSlide === total - 1;
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        slides.forEach((slide, i) => {
+            if (i !== 0) slide.style.display = 'none';
+        });
+        
+        showSlide(0);
+    </script>
+</body>
+</html>
