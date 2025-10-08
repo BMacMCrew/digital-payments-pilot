@@ -104,6 +104,17 @@
         .hero .subtitle {
             font-size: 20px;
             color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .hero .positioning {
+            font-size: 16px;
+            color: var(--text-dark);
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 20px;
         }
         
         section {
@@ -140,6 +151,20 @@
             font-size: 16px;
         }
         
+        .critical-callout {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(102, 126, 234, 0.05));
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .critical-callout h3 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 24px;
+        }
+        
         /* Interactive Architecture */
         .architecture-container {
             background: var(--bg-light);
@@ -165,6 +190,16 @@
             transform: translateX(5px);
         }
         
+        .arch-layer.certifying-officer {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+        
+        .arch-layer.certifying-officer:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
+        }
+        
         .arch-layer-title {
             font-size: 22px;
             font-weight: 700;
@@ -173,6 +208,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        
+        .arch-layer.certifying-officer .arch-layer-title {
+            color: #f59e0b;
         }
         
         .arch-components {
@@ -189,6 +228,11 @@
             border-left: 3px solid var(--primary);
             font-size: 14px;
             color: var(--text-dark);
+        }
+        
+        .arch-component.new {
+            border-left: 3px solid #10b981;
+            background: rgba(16, 185, 129, 0.05);
         }
         
         .flow-arrow {
@@ -470,12 +514,26 @@
     <div class="container">
         <div class="hero">
             <h1>Technical Documentation</h1>
-            <p class="subtitle">Architecture, APIs, Data Models & Integration Specifications</p>
+            <p class="subtitle">Blockchain Orchestration Layer for Government-to-Business Payments</p>
+            <div class="positioning">
+                QSMO-Aligned Shared Service | FedRAMP-Authorized Environment | OMB A-123 Compliance Engine
+            </div>
+        </div>
+
+        <div class="critical-callout">
+            <h3>🎯 Actus Strategic Position</h3>
+            <p><strong>Actus operates as the Data Entry / Payment Creator</strong> within the Treasury SPS dual-authorization model. We create complete, pre-audited, blockchain-backed Standard Payment Requests (SPRs) that federal Certifying Officers then review and cryptographically sign. This preserves the two-person rule while dramatically improving efficiency and accuracy through automation and immutable audit trails.</p>
+            <p style="margin-top: 15px;"><strong>Key Differentiator:</strong> Actus functions as an OMB A-123 internal controls engine, providing cryptographically verifiable proof of compliance at every step from commitment to disbursement.</p>
         </div>
 
         <section id="architecture">
             <h2>System Architecture</h2>
-            <p>Actus provides a blockchain orchestration layer that sits between agency ERPs and payment execution systems, ensuring compliance, immutability, and real-time settlements.</p>
+            <p>Actus provides the blockchain orchestration layer that bridges agency financial management systems with Treasury payment execution systems. Operating as <strong>intelligent middleware</strong>, Actus translates on-chain events into actions within traditional federal financial management systems and vice versa, ensuring every step is cryptographically verified, synchronized, and immutable. Our platform automates the coordination of disparate systems, processes, and compliance checks required to execute a government-to-business payment from commitment through final settlement.</p>
+            
+            <div class="info-box">
+                <h4>🏦 Capitalizing on the Open Banking Revolution</h4>
+                <p>Actus's strategic position leverages the open banking revolution to facilitate unprecedented accountability, compliance, and transparency in federal fund disbursement. By managing Commitments, Obligations, Expenses, and Disbursements through scalable immutable ledger systems, we bridge critical gaps between agency financial management systems and Treasury payment rails.</p>
+            </div>
             
             <div class="architecture-container">
                 <div class="arch-layer">
@@ -492,88 +550,191 @@
                 <div class="flow-arrow">↓</div>
                 
                 <div class="arch-layer">
-                    <div class="arch-layer-title">🔗 Actus Blockchain Orchestration Layer</div>
-                    <p style="color: var(--text-light); margin-bottom: 15px;">Core platform ensuring compliance and immutability</p>
+                    <div class="arch-layer-title">🔗 Actus Blockchain Orchestration Layer (Data Entry / Payment Creator)</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Automated creation of compliant, blockchain-backed SPRs</p>
                     <div class="arch-components">
+                        <div class="arch-component"><strong>Smart Contract Escrow</strong><br>Cryptographic commitment locks</div>
+                        <div class="arch-component"><strong>OMB A-123 Engine</strong><br>Internal controls automation</div>
                         <div class="arch-component"><strong>SPR Builder</strong><br>Creates payment requests</div>
-                        <div class="arch-component"><strong>Compliance Engine</strong><br>3-way match, CGAC/TAS</div>
+                        <div class="arch-component"><strong>Compliance Engine</strong><br>3-way match, CGAC/TAS validation</div>
                         <div class="arch-component"><strong>Blockchain Ledger</strong><br>Immutable transaction records</div>
-                        <div class="arch-component"><strong>Smart Contracts</strong><br>Automated rules engine</div>
+                        <div class="arch-component class="new""><strong>IPP/WebView Gateway</strong><br>For non-integrated agencies</div>
+                        <div class="arch-component"><strong>FedNow Integration</strong><br>ISO 20022 messaging</div>
+                        <div class="arch-component"><strong>Fiserv Gateway</strong><br>100% payment rail capability</div>
                         <div class="arch-component"><strong>Atomic Settlement</strong><br>Multi-party coordination</div>
                         <div class="arch-component"><strong>Webhook Manager</strong><br>Event notifications</div>
                     </div>
                 </div>
                 
-                <div class="flow-arrow">↓</div>
+                <div class="flow-arrow">↓ (SPR Package)</div>
                 
-                <div class="arch-layer">
-                    <div class="arch-layer-title">🏛️ Treasury Bureau of Fiscal Service (BFS)</div>
-                    <p style="color: var(--text-light); margin-bottom: 15px;">Federal payment validation and certification</p>
+                <div class="arch-layer certifying-officer">
+                    <div class="arch-layer-title">👤 Certifying Officer Review & Authorization</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;"><strong>Dual-authorization enforcement:</strong> Independent review and certification by designated federal official</p>
                     <div class="arch-components">
-                        <div class="arch-component"><strong>PAM Validator</strong><br>SPR validation</div>
-                        <div class="arch-component"><strong>SPS Certifier</strong><br>Payment certification</div>
+                        <div class="arch-component"><strong>SPR Package Review</strong><br>Validates completeness & accuracy</div>
+                        <div class="arch-component"><strong>PIV-Based Signature</strong><br>Cryptographic certification in SPS</div>
+                        <div class="arch-component"><strong>Legal Certification</strong><br>Attests to payment legality</div>
                     </div>
                 </div>
                 
-                <div class="flow-arrow">↓</div>
+                <div class="flow-arrow">↓ (Certified SPR)</div>
+                
+                <div class="arch-layer">
+                    <div class="arch-layer-title">🏛️ Treasury Bureau of Fiscal Service (BFS)</div>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Payment Authorization Manager generation and treasury validation</p>
+                    <div class="arch-components">
+                        <div class="arch-component"><strong>SPS Processing</strong><br>Receives certified SPR</div>
+                        <div class="arch-component"><strong>PAM Generator</strong><br>Creates payment authorization</div>
+                        <div class="arch-component"><strong>Treasury Validation</strong><br>Final compliance checks</div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓ (PAM File)</div>
                 
                 <div class="arch-layer">
                     <div class="arch-layer-title">⚡ Payment Execution Layer</div>
-                    <p style="color: var(--text-light); margin-bottom: 15px;">Final settlement through payment processors</p>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Atomic settlement through payment processors coordinated by Actus</p>
                     <div class="arch-components">
-                        <div class="arch-component"><strong>Fiserv Gateway</strong><br>Payment processor</div>
-                        <div class="arch-component"><strong>Fed Reserve FedNow</strong><br>Instant settlement rail</div>
-                        <div class="arch-component"><strong>Traditional Rails</strong><br>ACH, Fedwire, SWIFT</div>
+                        <div class="arch-component"><strong>Fiserv Gateway</strong><br>Primary payment processor</div>
+                        <div class="arch-component"><strong>FedNow Service</strong><br>Real-time settlement rail</div>
+                        <div class="arch-component"><strong>Traditional Rails</strong><br>ACH, Fedwire, RTP</div>
                     </div>
                 </div>
             </div>
 
             <h3>Core Components Explained</h3>
 
-            <h4>1. SPR Builder & Validator</h4>
+            <h4>1. Smart Contract Escrow & Commitment Management</h4>
             <ul>
-                <li>Assembles Standard Payment Requests from PO, invoice, receipt data</li>
-                <li>Validates CGAC/TAS codes and budget authority</li>
-                <li>Performs 3-way match (PO = Invoice = Receipt)</li>
-                <li>Generates immutable blockchain transaction</li>
+                <li>Creates cryptographically secured escrow commitments at contract award</li>
+                <li>Manages obligation locks on portions of escrowed commitments</li>
+                <li>Enforces budget authority and anti-deficiency protections</li>
+                <li>Releases obligations only upon successful invoice matching and receipt verification</li>
             </ul>
 
-            <h4>2. Compliance Engine</h4>
+            <h4>2. OMB A-123 Internal Controls Engine</h4>
             <ul>
-                <li>Enforces acquisition regulations (FAR/DFARS)</li>
-                <li>Validates financial obligations and commitments</li>
-                <li>Checks anti-deficiency protections</li>
-                <li>Audits all transactions for improper payment indicators</li>
+                <li><strong>Our key differentiator:</strong> Automated enforcement of OMB Circular A-123 principles</li>
+                <li>Immutable audit trail providing verifiable proof of compliance</li>
+                <li>Embedded regulatory rules prevent improper payments before execution</li>
+                <li>Enforces separation of duties through blockchain-based dual authorization</li>
+                <li>Real-time compliance monitoring and exception reporting</li>
             </ul>
 
-            <h4>3. Blockchain Ledger</h4>
+            <h4>3. SPR Builder & Validator (Data Entry Role)</h4>
             <ul>
-                <li>Stores immutable transaction records from appropriation to disbursement</li>
-                <li>Creates cryptographic proof chain for all payment actions</li>
-                <li>Enables atomic settlements across multiple parties</li>
-                <li>Provides real-time audit trail for Treasury and agency CFOs</li>
+                <li>Assembles complete Standard Payment Requests from PO, invoice, receipt data</li>
+                <li>Validates CGAC/TAS codes against Treasury account structure</li>
+                <li>Performs automated 3-way match (PO = Invoice = Receipt)</li>
+                <li>Generates immutable blockchain transaction linking all source documents</li>
+                <li>Creates pre-audited package for Certifying Officer review</li>
             </ul>
 
-            <h4>4. Smart Contracts</h4>
+            <h4>4. IPP/WebView Integration Gateway</h4>
             <ul>
-                <li>IF/THEN rules encoded on blockchain</li>
-                <li>Automated execution when conditions met</li>
-                <li>Example: IF (3-way match PASS AND budget available) THEN (generate SPR)</li>
-                <li>Reduces manual approvals by 95%+</li>
+                <li>Enables agencies without integrated financial management systems to use Actus</li>
+                <li>Creates SPRs directly through Bureau of Fiscal Service WebView interface</li>
+                <li>Bridges Invoice Presentation Portal (IPP) for invoice submission</li>
+                <li>Maintains blockchain immutability even for manual entry workflows</li>
             </ul>
 
-            <h4>5. Atomic Settlement Engine</h4>
+            <h4>5. Compliance Engine</h4>
+            <ul>
+                <li>Enforces Federal Acquisition Regulations (FAR/DFARS)</li>
+                <li>Validates financial obligations and budget commitments</li>
+                <li>Checks anti-deficiency protections automatically</li>
+                <li>Audits all transactions for Payment Integrity Information Act (PIIA) indicators</li>
+                <li>Generates compliance reports for CFO Act audits</li>
+            </ul>
+
+            <h4>6. Blockchain Ledger</h4>
+            <ul>
+                <li>Stores immutable records from appropriation through disbursement</li>
+                <li>Creates cryptographic proof chain for all payment lifecycle actions</li>
+                <li>Enables atomic settlements across multiple parties and systems</li>
+                <li>Provides real-time audit trail accessible to Treasury and agency CFOs</li>
+                <li>Supports continuous monitoring for OMB A-123 compliance</li>
+            </ul>
+
+            <h4>7. FedNow & ISO 20022 Integration</h4>
+            <ul>
+                <li>Constructs ISO 20022 messages (pacs.008, pacs.002) from blockchain events</li>
+                <li>Ensures payment instructions are traceable to authorizing source</li>
+                <li>Enables real-time gross settlement (RTGS) for instant payments</li>
+                <li>Maintains immutable linkage between on-chain events and FedNow transactions</li>
+            </ul>
+
+            <h4>8. Atomic Settlement Engine</h4>
             <ul>
                 <li>All-or-nothing execution for multi-party payments</li>
-                <li>Coordinates across FedNow, RTP, ACH, card networks</li>
-                <li>Guarantees financial integrity (no partial failures)</li>
-                <li>Immutable settlement records on blockchain</li>
+                <li>Coordinates across FedNow, RTP, ACH, and card networks</li>
+                <li>Guarantees financial integrity - no partial failures or reconciliation gaps</li>
+                <li>Immutable settlement records prevent disputes</li>
             </ul>
+
+            <h3>QSMO Marketplace Alignment</h3>
+            <div class="info-box">
+                <h4>Treasury Quality Service Management Office (QSMO) Positioning</h4>
+                <p>Actus is designed as a <strong>first-source shared service</strong> aligned with Treasury's QSMO marketplace vision. This positioning provides:</p>
+                <ul>
+                    <li><strong>Pre-vetted Solution:</strong> Simplifies agency procurement and ATO processes</li>
+                    <li><strong>Standardized Integration:</strong> Common APIs and data models across agencies</li>
+                    <li><strong>Economies of Scale:</strong> Shared infrastructure reduces per-agency costs</li>
+                    <li><strong>Continuous Compliance:</strong> Centralized updates maintain regulatory alignment</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="lifecycle">
+            <h2>G2B Payment Lifecycle</h2>
+            <p>This workflow demonstrates Actus's orchestration role from commitment through settlement.</p>
+
+            <h3>Complete Payment Flow</h3>
+            <ol>
+                <li>
+                    <strong>Smart Contract Creation & Escrow Commitment</strong><br>
+                    Agency action (contract award, budget commitment) triggers Actus to create a smart contract on blockchain. This establishes a cryptographically secured escrow commitment of funds with immutable record of obligation authority.
+                </li>
+                <li>
+                    <strong>Obligation Management with Locks</strong><br>
+                    Purchase orders and other instruments create specific locks on portions of escrowed commitments. Obligations remain locked on blockchain until release conditions are met.
+                </li>
+                <li>
+                    <strong>Invoice Matching & Obligation Relief</strong><br>
+                    Vendor submits invoice through IPP or direct integration. Actus performs automated 3-way match (PO = Invoice = Receipt of Goods/Services). Successful match relieves the obligation and triggers SPR generation.
+                </li>
+                <li>
+                    <strong>SPR Creation (Data Entry Role)</strong><br>
+                    Actus assembles complete Standard Payment Request with all supporting documentation, blockchain proofs, and compliance validations. This pre-audited package is prepared for Certifying Officer review.
+                </li>
+                <li>
+                    <strong>Certifying Officer Review & Signature (Dual Authorization)</strong><br>
+                    Designated federal Certifying Officer independently reviews the SPR package and supporting blockchain evidence. Officer cryptographically signs using PIV-based digital signature in Treasury SPS, certifying the payment's legality and accuracy.
+                </li>
+                <li>
+                    <strong>SPS Processing & PAM Generation</strong><br>
+                    Treasury Secure Payment System receives certified SPR and generates Payment Authorization Manager (PAM) file. This triggers Bureau of Fiscal Service payment processing.
+                </li>
+                <li>
+                    <strong>Atomic Settlement Coordination</strong><br>
+                    Actus coordinates with Fiserv gateway, FedNow, and blockchain to execute atomic settlement. The entire multi-step transaction either completes successfully across all systems or fails entirely, preventing partial states or reconciliation gaps.
+                </li>
+                <li>
+                    <strong>Immutable Settlement Record</strong><br>
+                    Final settlement is recorded on blockchain with cryptographic proof of execution. All parties receive real-time webhook notifications with immutable transaction references.
+                </li>
+            </ol>
+
+            <div class="warning-box">
+                <h4>⚠️ Critical: Dual-Authorization Model</h4>
+                <p>Actus NEVER performs the certification step. We create the payment request (Data Entry role), but a separate, designated federal Certifying Officer must independently review and sign (Certification role). This separation of duties is legally mandated and cryptographically enforced.</p>
+            </div>
         </section>
 
         <section id="api">
             <h2>API Reference</h2>
-            <p>RESTful API for integrating with Actus platform. All endpoints require JWT authentication.</p>
+            <p>RESTful API for integrating with Actus platform. All endpoints require JWT authentication and operate within FedRAMP-authorized infrastructure.</p>
 
             <h3>Base URLs</h3>
             <div class="code-block">
@@ -594,7 +755,7 @@ Testing:     https://test.act.us/v1/</pre>
                     <span class="endpoint-method post">POST</span>
                     <span class="endpoint-path">/payments/spr</span>
                 </div>
-                <div class="endpoint-description">Create a new Standard Payment Request</div>
+                <div class="endpoint-description">Create a new Standard Payment Request (Data Entry role)</div>
             </div>
 
             <div class="code-header">Request Body</div>
@@ -609,13 +770,14 @@ Testing:     https://test.act.us/v1/</pre>
   },
   <span class="string">"accounting"</span>: {
     <span class="string">"cgac"</span>: <span class="string">"070"</span>,
-    <span class="string">"tas"</span>: <span class="string">"070X2025/2026"</span>
+    <span class="string">"tas"</span>: <span class="string">"070X2025/2026"</span>,
+    <span class="string">"obligation_number"</span>: <span class="string">"OBL-2025-456"</span>
   },
   <span class="string">"amount"</span>: <span class="number">10000</span>,
-  <span class="string">"method"</span>: <span class="string">"RTP"</span>,
+  <span class="string">"method"</span>: <span class="string">"FEDNOW"</span>,
   <span class="string">"match_evidence"</span>: {
     <span class="string">"receipt_id"</span>: <span class="string">"RCP-2025-456"</span>,
-    <span class="string">"status"</span>: <span class="string">"PASS"</span>
+    <span class="string">"three_way_match_status"</span>: <span class="string">"PASS"</span>
   }
 }</pre>
             </div>
@@ -625,8 +787,9 @@ Testing:     https://test.act.us/v1/</pre>
                 <pre>{
   <span class="string">"payment_id"</span>: <span class="string">"pay_12345"</span>,
   <span class="string">"spr_id"</span>: <span class="string">"spr_67890"</span>,
-  <span class="string">"status"</span>: <span class="string">"PendingTreasury"</span>,
+  <span class="string">"status"</span>: <span class="string">"AwaitingCertification"</span>,
   <span class="string">"blockchain_tx"</span>: <span class="string">"0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385"</span>,
+  <span class="string">"certifying_officer_portal"</span>: <span class="string">"https://sps.treasury.gov/review/spr_67890"</span>,
   <span class="string">"created_at"</span>: <span class="string">"2025-09-15T14:03:22Z"</span>
 }</pre>
             </div>
@@ -636,7 +799,7 @@ Testing:     https://test.act.us/v1/</pre>
                     <span class="endpoint-method">GET</span>
                     <span class="endpoint-path">/payments/{payment_id}</span>
                 </div>
-                <div class="endpoint-description">Retrieve payment status and details</div>
+                <div class="endpoint-description">Retrieve payment status and complete audit trail</div>
             </div>
 
             <div class="endpoint">
@@ -644,25 +807,25 @@ Testing:     https://test.act.us/v1/</pre>
                     <span class="endpoint-method post">POST</span>
                     <span class="endpoint-path">/payments/{payment_id}/execute</span>
                 </div>
-                <div class="endpoint-description">Execute payment after Treasury PAM approval</div>
+                <div class="endpoint-description">Execute payment after Treasury PAM approval (triggered by certification)</div>
             </div>
 
             <div class="endpoint">
                 <div class="endpoint-header">
-                    <span class="endpoint-method">GET</span>
+                    <span class="endpoint-method post">POST</span>
                     <span class="endpoint-path">/webhooks/register</span>
                 </div>
                 <div class="endpoint-description">Register webhook endpoint for payment status updates</div>
             </div>
 
-            <h3>Compliance Endpoints</h3>
+            <h3>Compliance & Audit Endpoints</h3>
 
             <div class="endpoint">
                 <div class="endpoint-header">
                     <span class="endpoint-method post">POST</span>
                     <span class="endpoint-path">/compliance/validate</span>
                 </div>
-                <div class="endpoint-description">Validate 3-way match before SPR generation</div>
+                <div class="endpoint-description">Validate 3-way match and OMB A-123 controls before SPR generation</div>
             </div>
 
             <div class="endpoint">
@@ -670,7 +833,33 @@ Testing:     https://test.act.us/v1/</pre>
                     <span class="endpoint-method">GET</span>
                     <span class="endpoint-path">/compliance/audit/{payment_id}</span>
                 </div>
-                <div class="endpoint-description">Retrieve complete audit trail for payment</div>
+                <div class="endpoint-description">Retrieve complete immutable audit trail with blockchain proofs</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method">GET</span>
+                    <span class="endpoint-path">/compliance/a123/report</span>
+                </div>
+                <div class="endpoint-description">Generate OMB A-123 compliance report for agency CFO</div>
+            </div>
+
+            <h3>IPP/WebView Integration Endpoints</h3>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <span class="endpoint-path">/ipp/invoice/submit</span>
+                </div>
+                <div class="endpoint-description">Submit invoice through IPP gateway for non-integrated agencies</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <span class="endpoint-path">/webview/spr/create</span>
+                </div>
+                <div class="endpoint-description">Create SPR through WebView interface for manual workflows</div>
             </div>
         </section>
 
@@ -681,7 +870,7 @@ Testing:     https://test.act.us/v1/</pre>
             <div class="code-block">
                 <pre>{
   <span class="string">"payment_id"</span>: <span class="string">"pay_12345"</span>,
-  <span class="string">"request_id"</span>: <span class="string">"req_5555"</span>,
+  <span class="string">"spr_id"</span>: <span class="string">"spr_67890"</span>,
   <span class="string">"po_number"</span>: <span class="string">"PO-2025-00123"</span>,
   <span class="string">"invoice_id"</span>: <span class="string">"INV-2025-789"</span>,
   <span class="string">"supplier"</span>: {
@@ -695,21 +884,48 @@ Testing:     https://test.act.us/v1/</pre>
     <span class="string">"tas"</span>: <span class="string">"070X2025/2026"</span>,
     <span class="string">"obligation_number"</span>: <span class="string">"OBL-2025-456"</span>
   },
-  <span class="string">"method"</span>: <span class="string">"RTP"</span>,
+  <span class="string">"method"</span>: <span class="string">"FEDNOW"</span>,
   <span class="string">"amount"</span>: <span class="number">10000</span>,
   <span class="string">"status"</span>: <span class="string">"Settled"</span>,
   <span class="string">"blockchain_tx"</span>: <span class="string">"0x7f9fade1..."</span>,
   <span class="string">"gateway_ref"</span>: <span class="string">"fiserv_ref_789"</span>,
+  <span class="string">"certifying_officer"</span>: {
+    <span class="string">"name"</span>: <span class="string">"Jane Smith"</span>,
+    <span class="string">"piv_serial"</span>: <span class="string">"PIV_XXXXXX"</span>,
+    <span class="string">"certification_timestamp"</span>: <span class="string">"2025-09-15T14:03:45Z"</span>
+  },
   <span class="string">"events"</span>: [
+    {
+      <span class="string">"type"</span>: <span class="string">"COMMITMENT_CREATED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-01T09:00:00Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"smart_contract"</span>
+    },
+    {
+      <span class="string">"type"</span>: <span class="string">"OBLIGATION_LOCKED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-10T10:30:00Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"purchase_order_system"</span>
+    },
+    {
+      <span class="string">"type"</span>: <span class="string">"INVOICE_MATCHED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-15T14:00:00Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"compliance_engine"</span>
+    },
     {
       <span class="string">"type"</span>: <span class="string">"SPR_CREATED"</span>,
       <span class="string">"at"</span>: <span class="string">"2025-09-15T14:03:22Z"</span>,
-      <span class="string">"actor"</span>: <span class="string">"actus_system"</span>
+      <span class="string">"actor"</span>: <span class="string">"actus_spr_builder"</span>,
+      <span class="string">"role"</span>: <span class="string">"data_entry"</span>
     },
     {
-      <span class="string">"type"</span>: <span class="string">"TREASURY_APPROVED"</span>,
+      <span class="string">"type"</span>: <span class="string">"CERTIFIED"</span>,
       <span class="string">"at"</span>: <span class="string">"2025-09-15T14:03:45Z"</span>,
-      <span class="string">"actor"</span>: <span class="string">"treasury_pam"</span>
+      <span class="string">"actor"</span>: <span class="string">"certifying_officer"</span>,
+      <span class="string">"role"</span>: <span class="string">"certification"</span>
+    },
+    {
+      <span class="string">"type"</span>: <span class="string">"PAM_GENERATED"</span>,
+      <span class="string">"at"</span>: <span class="string">"2025-09-15T14:03:50Z"</span>,
+      <span class="string">"actor"</span>: <span class="string">"treasury_bfs"</span>
     },
     {
       <span class="string">"type"</span>: <span class="string">"PAYMENT_EXECUTED"</span>,
@@ -725,7 +941,7 @@ Testing:     https://test.act.us/v1/</pre>
                 <thead>
                     <tr>
                         <th>Actus Field</th>
-                        <th>SPR/ERP Field</th>
+                        <th>SPR/Treasury Field</th>
                         <th>Type</th>
                         <th>Required</th>
                     </tr>
@@ -756,6 +972,12 @@ Testing:     https://test.act.us/v1/</pre>
                         <td>Yes</td>
                     </tr>
                     <tr>
+                        <td><code>accounting.obligation_number</code></td>
+                        <td><code>OBLIGATION_ID</code></td>
+                        <td>string</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
                         <td><code>supplier.duns</code></td>
                         <td><code>PAYEE_DUNS</code></td>
                         <td>string (9 chars)</td>
@@ -776,7 +998,7 @@ Testing:     https://test.act.us/v1/</pre>
                     <tr>
                         <td><code>method</code></td>
                         <td><code>PAYMENT_METHOD</code></td>
-                        <td>enum</td>
+                        <td>enum (FEDNOW, ACH, RTP)</td>
                         <td>Yes</td>
                     </tr>
                 </tbody>
@@ -786,37 +1008,60 @@ Testing:     https://test.act.us/v1/</pre>
         <section id="integration">
             <h2>Integration Guide</h2>
 
+            <div class="critical-callout">
+                <h3>🔌 Critical Integrations for Market Readiness</h3>
+                <p>The following integrations are <strong>mandatory requirements</strong> for Actus to provide complete G2B payment orchestration:</p>
+                <ul>
+                    <li><strong>100% Fiserv Gateway Capability</strong> - REQUIRED for payment execution across all rails</li>
+                    <li><strong>100% WebView Interface Capability</strong> - REQUIRED for SPR creation in Treasury systems</li>
+                    <li><strong>FedNow Service Integration</strong> - MUST COMPLETE for real-time ISO 20022 messaging</li>
+                    <li><strong>IPP Portal Integration</strong> - REQUIRED for agencies without integrated financial management systems</li>
+                </ul>
+            </div>
+
             <h3>ERP Integration Flow</h3>
+            <p>Actus provides seamless integration with major federal ERP systems through standardized connectors and APIs.</p>
+            
             <ol>
-                <li><strong>Purchase Order Creation:</strong> Agency creates PO in their ERP system</li>
-                <li><strong>Data Sync:</strong> Actus receives PO data via Ascella integration layer</li>
-                <li><strong>Invoice Receipt:</strong> Supplier submits invoice (via IP or direct)</li>
-                <li><strong>3-Way Match:</strong> Actus validates PO = Invoice = Receipt</li>
-                <li><strong>SPR Generation:</strong> Actus creates blockchain-backed SPR</li>
-                <li><strong>Treasury Submission:</strong> SPR flows through ERP to Treasury BFS/PAM</li>
-                <li><strong>Approval Callback:</strong> Treasury PAM returns approval to Actus</li>
-                <li><strong>Payment Execution:</strong> Actus triggers Fiserv for settlement</li>
-                <li><strong>Webhook Notification:</strong> Settlement confirmation updates ERP</li>
+                <li><strong>Purchase Order Creation:</strong> Agency creates PO in their ERP system (SAP, Oracle, Momentum, etc.)</li>
+                <li><strong>Data Synchronization:</strong> Actus receives PO data through secure integration layer with real-time synchronization</li>
+                <li><strong>Smart Contract & Escrow:</strong> Actus creates blockchain commitment and locks obligation</li>
+                <li><strong>Invoice Receipt:</strong> Supplier submits invoice (via IPP, direct integration, or WebView for non-integrated agencies)</li>
+                <li><strong>3-Way Match:</strong> Actus validates PO = Invoice = Receipt using OMB A-123 controls</li>
+                <li><strong>SPR Generation (Data Entry):</strong> Actus creates blockchain-backed SPR with all compliance evidence</li>
+                <li><strong>Certifying Officer Review:</strong> Federal official independently reviews and signs in SPS</li>
+                <li><strong>PAM Generation:</strong> Treasury BFS generates Payment Authorization Manager file</li>
+                <li><strong>Payment Execution:</strong> Actus triggers Fiserv/FedNow for atomic settlement</li>
+                <li><strong>Webhook Notification:</strong> Settlement confirmation updates ERP through secure integration</li>
             </ol>
 
             <h3>Supported ERP Systems</h3>
-            <p>Integration is provided through our partner <strong>Ascella</strong>, who specializes in federal ERP connectivity:</p>
             <ul>
-                <li><strong>SAP:</strong> Direct API integration via Ascella connector</li>
-                <li><strong>Oracle EBS:</strong> Web services integration</li>
-                <li><strong>Momentum:</strong> Batch file exchange with real-time webhooks</li>
+                <li><strong>SAP:</strong> Direct API integration with real-time data sync</li>
+                <li><strong>Oracle EBS:</strong> Web services integration with automated workflows</li>
+                <li><strong>Momentum:</strong> Batch file exchange with webhook callbacks</li>
                 <li><strong>Legacy Systems:</strong> SFTP/CSV import with validation layer</li>
+            </ul>
+
+            <h3>IPP/WebView Integration (Non-Integrated Agencies)</h3>
+            <p>For agencies without direct ERP integration, Actus provides gateway access to Treasury's systems:</p>
+            <ul>
+                <li><strong>Invoice Presentation Portal (IPP):</strong> Submit invoices through BFS portal with blockchain recording</li>
+                <li><strong>WebView Interface:</strong> Create SPRs directly through Treasury's WebView with Actus orchestration</li>
+                <li><strong>Manual Entry Workflow:</strong> Maintains blockchain immutability even for manual processes</li>
+                <li><strong>Compliance Preservation:</strong> Same OMB A-123 controls apply regardless of entry method</li>
             </ul>
 
             <div class="info-box">
                 <h4>Integration Timeline</h4>
                 <p>Typical ERP integration takes 6-8 weeks:</p>
                 <ul>
-                    <li>Weeks 1-2: Schema mapping and field validation with Ascella</li>
+                    <li>Weeks 1-2: Schema mapping and field validation</li>
                     <li>Weeks 3-4: Sandbox testing with sample data</li>
                     <li>Weeks 5-6: UAT with agency stakeholders</li>
                     <li>Weeks 7-8: Production cutover and parallel run</li>
                 </ul>
+                <p><strong>IPP/WebView integration:</strong> 2-3 weeks for agencies without integrated financial systems</p>
             </div>
 
             <h3>Webhook Configuration</h3>
@@ -826,7 +1071,9 @@ Testing:     https://test.act.us/v1/</pre>
                 <pre>{
   <span class="string">"url"</span>: <span class="string">"https://agency.gov/webhooks/actus"</span>,
   <span class="string">"events"</span>: [
-    <span class="string">"payment.approved"</span>,
+    <span class="string">"payment.spr_created"</span>,
+    <span class="string">"payment.certified"</span>,
+    <span class="string">"payment.pam_generated"</span>,
     <span class="string">"payment.executed"</span>,
     <span class="string">"payment.settled"</span>,
     <span class="string">"payment.failed"</span>
@@ -842,6 +1089,7 @@ Testing:     https://test.act.us/v1/</pre>
   <span class="string">"timestamp"</span>: <span class="string">"2025-09-15T14:04:12Z"</span>,
   <span class="string">"payment_id"</span>: <span class="string">"pay_12345"</span>,
   <span class="string">"amount"</span>: <span class="number">10000</span>,
+  <span class="string">"blockchain_tx"</span>: <span class="string">"0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385"</span>,
   <span class="string">"gateway_ref"</span>: <span class="string">"fiserv_ref_789"</span>,
   <span class="string">"signature"</span>: <span class="string">"sha256_signature_here"</span>
 }</pre>
@@ -851,46 +1099,98 @@ Testing:     https://test.act.us/v1/</pre>
         <section id="security">
             <h2>Security & Compliance</h2>
 
-            <h3>Authentication</h3>
+            <h3>FedRAMP Authorization (Baseline Requirement)</h3>
+            <div class="critical-callout">
+                <h3>FedRAMP-Authorized Environment</h3>
+                <p>Actus operates within a FedRAMP-authorized infrastructure. This is a <strong>baseline security standard</strong> for any cloud service handling federal data, not an optional certification.</p>
+                <ul>
+                    <li><strong>Authorization Level:</strong> FedRAMP Moderate baseline implemented</li>
+                    <li><strong>Infrastructure:</strong> Deployed on FedRAMP-authorized cloud service providers</li>
+                    <li><strong>Reciprocity:</strong> Agencies can leverage existing authorization to accelerate ATO</li>
+                    <li><strong>Continuous Monitoring:</strong> Ongoing compliance validation and security assessments</li>
+                </ul>
+            </div>
+
+            <h3>Authority to Operate (ATO) Process</h3>
+            <p>The ATO is granted by a federal Authorizing Official (AO), never by a contractor. For systems connecting to Treasury payment rails, the Treasury/BFS AO holds ultimate authority.</p>
+            
+            <h4>Paperless Innovations Responsibilities:</h4>
+            <ul>
+                <li>Provide complete System Security Plan (SSP)</li>
+                <li>Maintain Control Implementation Summary (CIS)</li>
+                <li>Document architecture and data flows</li>
+                <li>Implement NIST 800-53 Moderate/High baseline controls (421 controls)</li>
+                <li>Support security assessment process</li>
+                <li>Provide continuous monitoring reports</li>
+            </ul>
+
+            <h4>Treasury/Agency AO Responsibilities:</h4>
+            <ul>
+                <li>Review and approve SSP and security documentation</li>
+                <li>Conduct Security Assessment & Authorization (SA&A)</li>
+                <li>Grant formal ATO (typically 3-year authorization)</li>
+                <li>Review audit logs and compliance reports</li>
+                <li>Approve Interconnection Security Agreements (ISAs)</li>
+            </ul>
+
+            <h3>Authentication & Access Control</h3>
             <ul>
                 <li><strong>JWT Tokens:</strong> All API requests require valid JWT bearer token</li>
                 <li><strong>Token Expiry:</strong> 1 hour default, refresh tokens valid 30 days</li>
-                <li><strong>Scopes:</strong> Fine-grained permissions (read:payments, write:spr, etc.)</li>
+                <li><strong>Scopes:</strong> Fine-grained permissions (read:payments, write:spr, certify:payments)</li>
+                <li><strong>PIV Integration:</strong> Support for PIV-based authentication for Certifying Officers</li>
+                <li><strong>Role-Based Access Control:</strong> Enforces separation of duties (Data Entry vs Certification)</li>
             </ul>
 
             <h3>Data Encryption</h3>
             <ul>
                 <li><strong>In Transit:</strong> TLS 1.3 for all API communications</li>
-                <li><strong>At Rest:</strong> AES-256 encryption for all stored data</li>
-                <li><strong>Blockchain:</strong> Cryptographic signatures for transaction integrity</li>
+                <li><strong>At Rest:</strong> AES-256 encryption using FIPS 140-3 validated modules</li>
+                <li><strong>Blockchain:</strong> Cryptographic signatures (ECDSA) for transaction integrity</li>
+                <li><strong>Key Management:</strong> Hardware Security Modules (HSMs) for key storage</li>
             </ul>
 
-            <h3>PCI Compliance</h3>
-            <div class="warning-box">
-                <h4>Payment Card Security</h4>
-                <p>For G2B virtual card payments:</p>
+            <h3>OMB A-123 Internal Controls</h3>
+            <div class="info-box">
+                <h4>Automated Compliance Enforcement</h4>
+                <p>Actus embeds OMB Circular A-123 requirements directly into the blockchain workflow:</p>
                 <ul>
-                    <li>Never store raw PANs in your systems</li>
-                    <li>Use Actus tokenization for all card references</li>
-                    <li>Implement hosted payment fields for sensitive data capture</li>
-                    <li>Log card usage but mask all but last 4 digits</li>
+                    <li><strong>Dual Authorization:</strong> Cryptographically enforced separation between Data Entry and Certification</li>
+                    <li><strong>Receipt of Goods/Services:</strong> 3-way match verification before obligation relief</li>
+                    <li><strong>Invoice Matching:</strong> Automated validation of PO = Invoice = Receipt</li>
+                    <li><strong>Payment Approval:</strong> Certifying Officer signature required before execution</li>
+                    <li><strong>Immutable Audit Trail:</strong> Complete blockchain record for IG and GAO audits</li>
                 </ul>
             </div>
 
-            <h3>FedRAMP Authorization</h3>
+            <h3>Audit Logging & Accountability</h3>
             <ul>
-                <li><strong>Level:</strong> FedRAMP High (in progress)</li>
-                <li><strong>Controls:</strong> 421 NIST 800-53 controls implemented</li>
-                <li><strong>Logging:</strong> Centralized audit logs with 7-year retention</li>
-                <li><strong>Monitoring:</strong> 24/7 SOC with automated threat detection</li>
+                <li><strong>Immutable Logs:</strong> Write-once, time-stamped records on blockchain</li>
+                <li><strong>Retention:</strong> 7-year retention for federal audit requirements</li>
+                <li><strong>SIEM Integration:</strong> Real-time feeds to Treasury security monitoring</li>
+                <li><strong>Non-Repudiation:</strong> Cryptographic signatures prevent transaction denial</li>
+                <li><strong>Incident Reporting:</strong> 1-hour notification to Treasury for security incidents</li>
             </ul>
+
+            <h3>Payment Card Industry (PCI) Compliance</h3>
+            <div class="warning-box">
+                <h4>Virtual Card Security</h4>
+                <p>For G2B virtual card payments:</p>
+                <ul>
+                    <li>Never store raw PANs - use Actus tokenization</li>
+                    <li>Implement hosted payment fields for sensitive data capture</li>
+                    <li>Log card usage but mask all but last 4 digits</li>
+                    <li>Fiserv gateway handles PCI DSS compliance for card processing</li>
+                </ul>
+            </div>
 
             <h3>Blockchain Security</h3>
             <ul>
                 <li><strong>Consensus:</strong> Byzantine Fault Tolerant (BFT) algorithm</li>
                 <li><strong>Nodes:</strong> Distributed across Treasury, agencies, and Actus infrastructure</li>
-                <li><strong>Immutability:</strong> Hash chaining prevents retroactive modification</li>
-                <li><strong>Access Control:</strong> Smart contract permissions enforce who can execute transactions</li>
+                <li><strong>Immutability:</strong> Cryptographic hash chaining prevents retroactive modification</li>
+                <li><strong>Smart Contract Permissions:</strong> Role-based execution control</li>
+                <li><strong>Private Blockchain:</strong> Permissioned network for federal use only</li>
             </ul>
 
             <h3>Rate Limits</h3>
@@ -917,6 +1217,11 @@ Testing:     https://test.act.us/v1/</pre>
                         <td>POST /compliance/validate</td>
                         <td>2000 req/min</td>
                         <td>4000</td>
+                    </tr>
+                    <tr>
+                        <td>POST /ipp/invoice/submit</td>
+                        <td>500 req/min</td>
+                        <td>1000</td>
                     </tr>
                 </tbody>
             </table>
@@ -955,24 +1260,158 @@ Testing:     https://test.act.us/v1/</pre>
 
             <h3>Test Cases</h3>
             <ol>
-                <li><strong>SPR Happy Path:</strong> Valid PO, invoice, receipt → Treasury approval → settlement</li>
-                <li><strong>3-Way Match Failure:</strong> Invoice amount mismatch → validation error</li>
-                <li><strong>Treasury Rejection:</strong> Invalid TAS code → SPR rejected by PAM</li>
-                <li><strong>Webhook Retry:</strong> Simulate network failure → automatic retry logic</li>
-                <li><strong>Atomic Split:</strong> Multi-party payment → all-or-nothing settlement</li>
-                <li><strong>Rail Fallback:</strong> RTP unavailable → automatic ACH fallback</li>
+                <li><strong>SPR Happy Path:</strong> Valid PO, invoice, receipt → Certifying Officer signature → Treasury PAM → settlement</li>
+                <li><strong>3-Way Match Failure:</strong> Invoice amount mismatch → compliance engine rejection</li>
+                <li><strong>Dual Authorization Test:</strong> Verify same user cannot create AND certify payment</li>
+                <li><strong>Treasury Rejection:</strong> Invalid TAS code → SPR rejected by PAM validator</li>
+                <li><strong>IPP/WebView Flow:</strong> Manual invoice entry → blockchain recording → SPR generation</li>
+                <li><strong>Atomic Settlement Test:</strong> Multi-party payment → all-or-nothing completion</li>
+                <li><strong>FedNow Integration:</strong> ISO 20022 message construction → real-time settlement</li>
+                <li><strong>Webhook Retry:</strong> Simulate network failure → automatic retry with exponential backoff</li>
             </ol>
 
             <div class="info-box">
                 <h4>Test Data</h4>
                 <p>Use these test values in testing environment:</p>
                 <ul>
-                    <li>CGAC: <code>070</code> (DHS)</li>
+                    <li>CGAC: <code>070</code> (DHS) or <code>012</code> (USDA)</li>
                     <li>TAS: <code>070X2025/2026</code></li>
                     <li>Test DUNS: <code>999999999</code></li>
-                    <li>Test Amount: <code>1000</code> (any amount ending in 00 auto-approves)</li>
+                    <li>Test Amount: <code>1000</code> (amounts ending in 00 auto-approve in test)</li>
+                    <li>Test Certifying Officer: <code>test_co@treasury.gov</code></li>
                 </ul>
             </div>
+        </section>
+
+        <section id="dual-auth-matrix">
+            <h2>Dual-Authorization Compliance Matrix</h2>
+            <p>This matrix clarifies the separation of responsibilities between Paperless Innovations (Data Entry/Payment Creator) and Treasury/Agency officials (Certification and Authorization).</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Control Area</th>
+                        <th>Source/Reference</th>
+                        <th>Key Requirement</th>
+                        <th>Paperless Innovations Responsibility</th>
+                        <th>Treasury (BFS / AO) Responsibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Segregation of Duties</strong></td>
+                        <td>SPS Manual; OMB A-123 App B; NIST AC-5, AC-6</td>
+                        <td>Ensure no single individual can both initiate and certify a payment</td>
+                        <td>Design system roles so that "create" and "certify" actions require two separate authenticated users; enforce RBAC and least privilege</td>
+                        <td>Verify control design via SSP review; audit separation-of-duties logs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dual Authorization Enforcement</strong></td>
+                        <td>Treasury Financial Manual I-4A-2000; SPS User Guide Vol II</td>
+                        <td>Require distinct digital certificates for entry and certification</td>
+                        <td>Ensure only Treasury-issued PIV-PKI certificates can be used to sign SPS transactions; no shared keys</td>
+                        <td>Issue and manage certificates; monitor usage and revoke compromised keys</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authentication & Non-Repudiation</strong></td>
+                        <td>NIST IA-2, IA-5, SC-12; FIPS 201-3</td>
+                        <td>Use multifactor authentication and cryptographic signatures for certifying officers</td>
+                        <td>Support PIV login and signed message submission; maintain PKI trust chain</td>
+                        <td>Provide CA hierarchy; verify audit records of signature validity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Separation of System Boundaries</strong></td>
+                        <td>NIST SC-7, SC-32; FISMA</td>
+                        <td>Contractor system must be logically separate from SPS enclave</td>
+                        <td>Implement network segmentation, encrypted API/file exchange, DMZ gateway, and boundary firewall rules</td>
+                        <td>Approve Interconnection Security Agreement (ISA); conduct boundary testing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Access Control & Least Privilege</strong></td>
+                        <td>NIST AC-2, AC-3, AC-6</td>
+                        <td>Limit access to authorized personnel with need-to-know</td>
+                        <td>Maintain user provisioning logs; quarterly recertification of roles; disable dormant accounts</td>
+                        <td>Review access reports; verify account lifecycle processes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audit Logging & Accountability</strong></td>
+                        <td>NIST AU-2, AU-6, AU-12</td>
+                        <td>Record all creation, submission, and certification events</td>
+                        <td>Maintain immutable logs (write-once, time-stamped); provide to Treasury upon request</td>
+                        <td>Review audit logs for anomalies; integrate into Treasury SIEM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>System Integrity & Change Control</strong></td>
+                        <td>NIST CM-2, CM-3, CM-6</td>
+                        <td>Protect against unauthorized modifications to payment logic</td>
+                        <td>Use code-signing, peer review, and CI/CD approvals; document configuration baselines</td>
+                        <td>Approve change requests; maintain version control of approved software</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Incident Response & Reporting</strong></td>
+                        <td>NIST IR-4, IR-6; Treasury IR Policy</td>
+                        <td>Notify Treasury of incidents within 1 hour of discovery</td>
+                        <td>Maintain IR plan; train staff; integrate with Treasury's incident-handling process</td>
+                        <td>Coordinate response; report to US-CERT/FedRAMP PMO as needed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Continuous Monitoring</strong></td>
+                        <td>NIST CA-7, RA-5</td>
+                        <td>Conduct vulnerability scans and control assessments</td>
+                        <td>Submit monthly scan results and annual self-assessment to Treasury ISSO</td>
+                        <td>Review reports; issue POA&M tasks; verify remediation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>System Security Plan (SSP)</strong></td>
+                        <td>FISMA; NIST PL-2, CA-2</td>
+                        <td>Document all implemented controls and interfaces</td>
+                        <td>Prepare and maintain SSP, Control Implementation Summary (CIS), and Architecture Diagram</td>
+                        <td>Approve SSP; perform Security Assessment & Authorization (SA&A)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authority to Operate (ATO)</strong></td>
+                        <td>FISMA; NIST CA-6</td>
+                        <td>Obtain written authorization before production use</td>
+                        <td>Develop artifacts (SSP, SAR, POA&M); support Treasury security testing</td>
+                        <td>BFS/Treasury Authorizing Official (AO) signs and grants ATO (3 years)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FedRAMP Alignment (if cloud)</strong></td>
+                        <td>FedRAMP Moderate Baseline</td>
+                        <td>Host environment must meet FedRAMP Moderate</td>
+                        <td>Use FedRAMP-authorized IaaS/SaaS; maintain CSP authorization</td>
+                        <td>Accept or sponsor FedRAMP package; monitor CSP compliance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Records Management / Retention</strong></td>
+                        <td>36 CFR 1236; NARA GRS 5.2</td>
+                        <td>Preserve payment records for audit and legal hold</td>
+                        <td>Implement immutable storage (WORM or blockchain hash anchoring); apply retention policy</td>
+                        <td>Oversee compliance; approve retention schedule</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Encryption</strong></td>
+                        <td>NIST SC-13, SC-28</td>
+                        <td>Encrypt all payment and PII data in transit and at rest</td>
+                        <td>Use FIPS 140-3 validated modules (TLS 1.3, AES-256)</td>
+                        <td>Verify encryption compliance; conduct crypto-key reviews</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Privacy & PII Protection</strong></td>
+                        <td>NIST AR-4, PT-2</td>
+                        <td>Protect PII of payees and certifying officers</td>
+                        <td>Apply data minimization; redact nonessential identifiers in logs</td>
+                        <td>Approve Privacy Impact Assessment (PIA)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Continuity & Contingency</strong></td>
+                        <td>NIST CP-2, CP-6</td>
+                        <td>Ensure recoverability of payment data</td>
+                        <td>Maintain backup/offsite replication; perform annual contingency test</td>
+                        <td>Review BCP results; validate recovery objectives</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </div>
 
@@ -982,11 +1421,11 @@ Testing:     https://test.act.us/v1/</pre>
             Contact our developer support team for API access, integration assistance, and technical documentation
         </p>
         <p style="font-size: 18px; margin-bottom: 30px;">
-            Email: <a href="mailto:dev-support@paperless-innovations.com">dev-support@paperless-innovations.com</a>
+            Email: <a href="mailto:bmcc@paperless-innovations.com">bmcc@paperless-innovations.com</a>
         </p>
         <a href="../index.html" class="cta-button">Back to Main Menu</a>
         <p style="margin-top: 30px; font-size: 14px; opacity: 0.7;">
-            Documentation Version 1.0 | Last Updated: October 2025
+            Documentation Version 2.0 | Last Updated: October 2025 | Aligned with Corporate Guiding Document
         </p>
     </footer>
 
@@ -1024,7 +1463,6 @@ Testing:     https://test.act.us/v1/</pre>
             });
         });
         
-        // Add hover effect to architecture layers
         document.querySelectorAll('.arch-layer').forEach(layer => {
             layer.addEventListener('click', () => {
                 layer.style.transform = 'scale(1.02)';
