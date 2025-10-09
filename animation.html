@@ -60,14 +60,14 @@
             font-weight: 600;
             color: #e94560;
             opacity: 0;
-            transition: opacity 0.3s;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 12px 24px;
+            transition: opacity 0.5s;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 25px;
             border-radius: 8px;
-            border: 1px solid #e94560;
+            border: 2px solid #e94560;
             max-width: 90%;
             z-index: 100;
-            line-height: 1.4;
+            line-height: 1.5;
         }
         .step-label.active {
             opacity: 1;
@@ -94,6 +94,22 @@
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .speed-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .speed-btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        .speed-btn.active {
+            background: linear-gradient(135deg, #27ae60 0%, #16a085 100%);
         }
         .progress-bar {
             width: 100%;
@@ -221,7 +237,7 @@
                     <rect width="200" height="140" rx="10" fill="rgba(255, 255, 255, 0.1)" stroke="#667eea" stroke-width="2"/>
                     <text x="100" y="30" text-anchor="middle" font-size="14" fill="#fff" font-weight="600">DHS Agency ERP</text>
                     <text x="100" y="50" text-anchor="middle" font-size="11" fill="#a0a0a0">(SAP/Oracle/Momentum)</text>
-                    <text x="100" y="70" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.7)" font-style="italic">Via Ascella Integration</text>
+                    <text x="100" y="70" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.7)" font-style="italic">Routing & Validation</text>
                     <rect x="30" y="85" width="140" height="15" rx="3" fill="#667eea" opacity="0.5"/>
                     <text x="100" y="96" text-anchor="middle" font-size="9" fill="#fff">SPR Routing Layer</text>
                     <rect x="30" y="105" width="140" height="15" rx="3" fill="#667eea" opacity="0.5"/>
@@ -319,15 +335,15 @@
             
             <!-- Step Labels -->
             <div id="label1" class="step-label">Step 1: DHS Buyer creates Purchase Order in Actus platform</div>
-            <div id="label2" class="step-label">Step 2: Invoice captured in Actus; Smart contracts validate 3-way match (PO = Invoice = Receipt)</div>
-            <div id="label3" class="step-label">Step 3: Actus builds blockchain-backed SPR with CGAC/TAS codes and compliance evidence</div>
-            <div id="label4" class="step-label">Step 4: SPR routed through Agency ERP (via Ascella) to validate against obligations</div>
+            <div id="label2" class="step-label">Step 2: Invoice captured in Actus; Smart contracts validate 3-way match<br>(PO = Invoice = Receipt)</div>
+            <div id="label3" class="step-label">Step 3: Actus builds blockchain-backed SPR with CGAC/TAS codes<br>and compliance evidence</div>
+            <div id="label4" class="step-label">Step 4: SPR routed through Agency ERP to validate against obligations</div>
             <div id="label5" class="step-label">Step 5: SPR forwarded to Certifying Officer for dual authorization review</div>
             <div id="label6" class="step-label">Step 6: Certified SPR sent to Treasury BFS Payment Authorization Manager (PAM)</div>
-            <div id="label7" class="step-label">Step 7: Treasury validates SPR against budget authority and CGAC/TAS; PAM approval returned</div>
+            <div id="label7" class="step-label">Step 7: Treasury validates SPR against budget authority and CGAC/TAS;<br>PAM approval returned</div>
             <div id="label8" class="step-label">Step 8: Actus receives approval and triggers Fiserv to execute payment</div>
-            <div id="label9" class="step-label">Step 9: Fiserv executes atomic settlement via selected rail (RTP/FedNow/ACH/G2B)</div>
-            <div id="label10" class="step-label">Complete! Supplier paid with full blockchain audit trail and immutable records ✓</div>
+            <div id="label9" class="step-label">Step 9: Fiserv executes atomic settlement via selected rail<br>(RTP/FedNow/ACH/G2B)</div>
+            <div id="label10" class="step-label">Complete! Supplier paid with full blockchain audit trail<br>and immutable records ✓</div>
         </div>
         
         <div class="progress-bar">
@@ -341,7 +357,7 @@
             </div>
             <div class="legend-item">
                 <div class="legend-box" style="background: #667eea;"></div>
-                <span>Agency ERP (Via Ascella)</span>
+                <span>Agency ERP</span>
             </div>
             <div class="legend-item">
                 <div class="legend-box" style="background: #f39c12;"></div>
@@ -358,9 +374,16 @@
         </div>
         
         <div class="controls">
-            <button id="playBtn">▶ Play Full Animation</button>
+            <button id="playBtn">▶ Play</button>
+            <button id="pauseBtn" disabled>⏸ Pause</button>
             <button id="resetBtn">⟲ Reset</button>
-            <button id="slowBtn">🐢 Slow Mode</button>
+            <div class="speed-controls">
+                <span style="font-size: 14px; margin-right: 5px;">Speed:</span>
+                <button class="speed-btn" data-speed="0.5">0.5x</button>
+                <button class="speed-btn active" data-speed="1">1x</button>
+                <button class="speed-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-btn" data-speed="2">2x</button>
+            </div>
         </div>
     </div>
 
@@ -381,12 +404,21 @@
         };
         
         let isAnimating = false;
+        let isPaused = false;
         let animationSpeed = 1;
+        let currentStep = 0;
+        let pauseResolve = null;
+
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const speedBtns = document.querySelectorAll('.speed-btn');
 
         function showLabel(num) {
             document.querySelectorAll('.step-label').forEach(label => label.classList.remove('active'));
             const label = document.getElementById(`label${num}`);
             if (label) label.classList.add('active');
+            currentStep = num;
         }
 
         function setOpacity(element, value) {
@@ -394,92 +426,152 @@
         }
 
         function wait(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms / animationSpeed));
+            return new Promise(resolve => {
+                const adjustedTime = ms / animationSpeed;
+                let timeoutId;
+                
+                const checkPause = setInterval(() => {
+                    if (isPaused) {
+                        clearTimeout(timeoutId);
+                        clearInterval(checkPause);
+                        pauseResolve = () => {
+                            pauseResolve = null;
+                            resolve();
+                        };
+                    }
+                }, 100);
+                
+                timeoutId = setTimeout(() => {
+                    clearInterval(checkPause);
+                    if (!isPaused) resolve();
+                }, adjustedTime);
+            });
         }
 
         async function playAnimation() {
-            if (isAnimating) return;
+            if (isAnimating && !isPaused) return;
+            
+            if (isPaused) {
+                isPaused = false;
+                pauseBtn.textContent = '⏸ Pause';
+                pauseBtn.disabled = false;
+                playBtn.disabled = true;
+                if (pauseResolve) pauseResolve();
+                return;
+            }
+            
             isAnimating = true;
+            playBtn.disabled = true;
+            pauseBtn.disabled = false;
             resetAnimation();
-            await wait(500);
+            await wait(1000);
             
             // Step 1: Buyer creates PO in Actus
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(1);
             elements.progressFill.style.width = '10%';
             setOpacity(elements.flow1, 1);
-            await wait(2000);
+            await wait(3500);
             
             // Step 2: Invoice captured in Actus
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(2);
             elements.progressFill.style.width = '20%';
-            await wait(2000);
+            await wait(3500);
             
             // Step 3: Actus builds SPR with blockchain
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(3);
             elements.progressFill.style.width = '30%';
             setOpacity(elements.blockchain, 1);
             setOpacity(elements.sprDoc, 1);
-            await wait(2000);
+            await wait(3500);
             
             // Step 4: SPR routed through ERP
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(4);
             elements.progressFill.style.width = '40%';
             setOpacity(elements.flow2, 1);
-            await wait(1500);
+            await wait(3000);
             
             // Step 5: SPR to Certifying Officer
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(5);
             elements.progressFill.style.width = '50%';
             setOpacity(elements.flow3, 1);
-            await wait(1500);
+            await wait(3000);
             
             // Step 6: Certified SPR to Treasury
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(6);
             elements.progressFill.style.width = '60%';
             setOpacity(elements.flow4, 1);
-            await wait(1500);
+            await wait(3000);
             
             // Step 7: Treasury validation and approval
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(7);
             elements.progressFill.style.width = '70%';
-            await wait(2000);
+            await wait(3500);
             
             // Step 8: Approval back to Actus, trigger Fiserv
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(8);
             elements.progressFill.style.width = '80%';
             setOpacity(elements.flow5, 1);
             setOpacity(elements.flow7, 1);
-            await wait(1500);
+            await wait(3000);
             
             // Step 9: Atomic settlement execution
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(9);
             elements.progressFill.style.width = '90%';
             setOpacity(elements.flow6, 1);
-            await wait(1500);
+            await wait(3000);
             
             // Step 10: Complete
+            if (isPaused) await new Promise(r => pauseResolve = r);
             showLabel(10);
             elements.progressFill.style.width = '100%';
             setOpacity(elements.successRing, 1);
             setOpacity(elements.successCheck, 1);
             
             isAnimating = false;
+            playBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        function pauseAnimation() {
+            isPaused = true;
+            pauseBtn.textContent = '▶ Resume';
+            playBtn.disabled = true;
         }
 
         function resetAnimation() {
+            isPaused = false;
+            pauseResolve = null;
             Object.values(elements).forEach(el => {
                 if (el && el !== elements.progressFill) setOpacity(el, 0);
             });
             elements.progressFill.style.width = '0%';
             document.querySelectorAll('.step-label').forEach(label => label.classList.remove('active'));
+            currentStep = 0;
             isAnimating = false;
+            playBtn.disabled = false;
+            pauseBtn.disabled = true;
+            pauseBtn.textContent = '⏸ Pause';
         }
 
-        document.getElementById('playBtn').addEventListener('click', playAnimation);
-        document.getElementById('resetBtn').addEventListener('click', resetAnimation);
-        document.getElementById('slowBtn').addEventListener('click', () => {
-            animationSpeed = animationSpeed === 1 ? 0.5 : 1;
-            document.getElementById('slowBtn').textContent = animationSpeed === 1 ? '🐢 Slow Mode' : '🐇 Normal Speed';
+        playBtn.addEventListener('click', playAnimation);
+        pauseBtn.addEventListener('click', pauseAnimation);
+        resetBtn.addEventListener('click', resetAnimation);
+        
+        speedBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                speedBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                animationSpeed = parseFloat(btn.dataset.speed);
+            });
         });
         
         setTimeout(playAnimation, 1000);
